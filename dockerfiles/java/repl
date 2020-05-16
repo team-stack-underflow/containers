@@ -1,0 +1,3 @@
+FROM java/base
+RUN jshell # Perform first time set-up
+CMD jshell
