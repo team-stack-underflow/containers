@@ -1,2 +1,6 @@
 FROM base
-ENTRYPOINT echo Hello World!
+RUN apt install -y unzip
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+RUN unzip awscliv2.zip
+RUN ./aws/install
+ENTRYPOINT aws sqs send-message --queue-url https://sqs.us-east-1.amazonaws.com/$USER_ID/$RUN_ID-input --message-body Hello!
