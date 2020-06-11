@@ -1,6 +1,5 @@
 FROM base
-RUN apt install -y unzip
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-RUN unzip awscliv2.zip
-RUN ./aws/install
-ENTRYPOINT aws sqs send-message --queue-url https://sqs.us-east-1.amazonaws.com/$USER_ID/$RUN_ID-input --message-body Hello!
+RUN apt install -y python-is-python3 python3-pip
+RUN python -m pip install boto3
+COPY input.py output.py ./
+ENTRYPOINT python input.py | tee | python output.py
