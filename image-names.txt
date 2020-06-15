@@ -1,6 +1,7 @@
 c/repl
 java/base
 java/repl
+javascript/repl
 python/repl
 source/repl
 test

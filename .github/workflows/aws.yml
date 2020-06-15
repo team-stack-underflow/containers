@@ -58,10 +58,10 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
-        docker build -t base -f base-dockerfile .
+        docker build -t base -f base-dockerfile ./context
         for IMAGE_NAME in $(cat ../image-names.txt)
         do
-            docker build -t $IMAGE_NAME -f $IMAGE_NAME .
+            docker build -t $IMAGE_NAME -f $IMAGE_NAME ./context
             docker tag $IMAGE_NAME $ECR_REGISTRY/runnable/$IMAGE_NAME
             docker push $ECR_REGISTRY/runnable/$IMAGE_NAME
         done
