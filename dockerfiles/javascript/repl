@@ -1,0 +1,4 @@
+FROM base
+RUN apt install -y nodejs
+COPY input.py output.py /pipes/
+ENTRYPOINT python /pipes/input.py | node -i 2>&1 | python /pipes/output.py
