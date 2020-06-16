@@ -1,3 +1,3 @@
 FROM base
 COPY input.py output.py /pipes/
-ENTRYPOINT python /pipes/input.py | python -i 2>&1 | python /pipes/output.py
+ENTRYPOINT echo "python /pipes/input.py | python -i |& python /pipes/output.py" | bash
