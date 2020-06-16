@@ -1,4 +1,4 @@
 FROM base
 RUN apt install -y nodejs
 COPY input.py output.py /pipes/
-ENTRYPOINT python /pipes/input.py | python -i | python /pipes/output.py
+ENTRYPOINT python /pipes/input.py | python -i |& python /pipes/output.py
