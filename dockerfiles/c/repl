@@ -1,6 +1,5 @@
 FROM base
-RUN apt-get install -y python3-pip python-is-python3
 RUN git clone https://github.com/alexandru-dinu/igcc.git
 WORKDIR igcc
 RUN pip3 install -r requirements.txt
-CMD ./igcc -I libigcc
+ENTRYPOINT python /pipes/input.py | ./igcc -I libigcc 2>&1 | python /pipes/output.py
