@@ -2,4 +2,4 @@ FROM base
 RUN git clone https://github.com/alexandru-dinu/igcc.git
 WORKDIR igcc
 RUN pip3 install -r requirements.txt
-ENTRYPOINT python /pipes/input.py | ./igcc -I libigcc 2>&1 | python /pipes/output.py
+ENTRYPOINT python /pipes/input.py | ./igcc -I libigcc 2>&1 | sed -u -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g" | stdbuf -o0 tr -d "\1\2" | python /pipes/output.py
