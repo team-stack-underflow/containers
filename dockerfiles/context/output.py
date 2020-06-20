@@ -12,7 +12,13 @@ if __name__ == "__main__":
         if len(line) > 0:
             response = sqs.send_message(
                 QueueUrl=queue_url,
-                MessageBody=line
+                MessageBody=line,
+                MessageAttributes={
+                    "client": {
+                        "StringValue": environ["RUN_ID"],
+                        "DataType": "String"
+                    }
+                }
             )
 
 
