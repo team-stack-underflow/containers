@@ -1,0 +1,5 @@
+FROM base
+COPY download.py compile.py /pipes/
+ENV SRC_FILE="program.c"
+ENV COMPILE_CMD="gcc program.c -o program"
+ENTRYPOINT python /pipes/download.py && python /pipes/compile.py && python /pipes/input.py | stdbuf -o0 ./program | python /pipes/output.py

@@ -1,0 +1,4 @@
+FROM base
+COPY download.py /pipes/
+ENV SRC_FILE="program.py"
+ENTRYPOINT python /pipes/download.py && python /pipes/input.py | python program.py 2>&1 | python /pipes/output.py

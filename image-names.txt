@@ -1,7 +1,11 @@
 c/repl
+c/compile
 java/base
+java/compile
 java/repl
+javascript/compile
 javascript/repl
+python/compile
 python/repl
 source/repl
 test

@@ -1,0 +1,5 @@
+FROM base
+RUN apt install -y nodejs
+COPY download.py /pipes/
+ENV SRC_FILE="program.js"
+ENTRYPOINT python /pipes/download.py && python /pipes/input.py | node program.js 2>&1 | python /pipes/output.py

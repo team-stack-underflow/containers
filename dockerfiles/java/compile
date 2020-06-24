@@ -1,0 +1,5 @@
+FROM java/base
+COPY download.py compile.py /pipes/
+ENV SRC_FILE="Program.java"
+ENV COMPILE_CMD="javac Program.java"
+ENTRYPOINT python /pipes/download.py && python /pipes/compile.py && python /pipes/input.py | stdbuf -o0 java Program | python /pipes/output.py
