@@ -3,7 +3,7 @@ import boto3
 
 sqs = boto3.client('sqs')
 
-queue_url = f"https://sqs.us-east-1.amazonaws.com/%s/%s-input" % (environ["USER_ID"], environ["RUN_ID"])
+queue_url = f"https://sqs.us-east-1.amazonaws.com/%s/%s-src" % (environ["USER_ID"], environ["RUN_ID"])
 
 if __name__ == "__main__":
     response = sqs.receive_message(
