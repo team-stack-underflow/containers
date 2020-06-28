@@ -4,7 +4,7 @@ import subprocess
 
 sqs = boto3.client('sqs')
 
-queue_url = f"https://sqs.us-east-1.amazonaws.com/%s/%s-output" % (environ["USER_ID"], environ["RUN_ID"])
+queue_url = f"https://sqs.us-east-1.amazonaws.com/%s/%s-output.fifo" % (environ["USER_ID"], environ["RUN_ID"])
 
 if __name__ == "__main__":
     compile = subprocess.run(environ["COMPILE_CMD"].split(), capture_output=True, text=True)
@@ -17,7 +17,9 @@ if __name__ == "__main__":
                     "StringValue": environ["RUN_ID"],
                     "DataType": "String"
                 }
-            }
+            },
+            MessageDeduplicationId="CompileError",
+            MessageGroupId="CompileError"
         )
     exit(compile.returncode)
     
