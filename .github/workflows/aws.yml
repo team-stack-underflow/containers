@@ -25,9 +25,6 @@
 
 on:
   push:
-    branches:
-      - master
-      - test
 
 name: Deploy to Amazon ECS
 
