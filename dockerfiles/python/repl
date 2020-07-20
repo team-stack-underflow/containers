@@ -1,3 +1,4 @@
-FROM base
+FROM python:3-alpine
+RUN python -m pip install boto3
 COPY input.py output.py /pipes/
 ENTRYPOINT python /pipes/input.py | python -i |& python /pipes/output.py
