@@ -4,6 +4,7 @@ import boto3
 sqs = boto3.client('sqs')
 
 queue_url = f"https://sqs.us-east-1.amazonaws.com/%s/%s-%s-input.fifo" % (environ["USER_ID"], environ["CLIENT_ID"], environ["RUN_ID"])
+box_suffix = "-boxed"
 
 if __name__ == "__main__":
     while True:
@@ -14,7 +15,7 @@ if __name__ == "__main__":
         if "Messages" in response:
             messages = response["Messages"]
             for msg in messages:
-                print(msg["Body"], flush=True)
+                print(msg["Body"][:-len(box_suffix)], flush=True)
                 sqs.delete_message(
                     QueueUrl=queue_url,
                     ReceiptHandle=msg["ReceiptHandle"]
